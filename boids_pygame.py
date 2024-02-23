@@ -20,21 +20,22 @@ class Boid:
         pygame.draw.circle(screen, (0, 0, 255), (int(self.x), int(self.y)), 2)
 
 
-
 def distance(boid1, boid2):
     return np.sqrt((boid1.x - boid2.x) ** 2 + (boid1.y - boid2.y) ** 2)
 
 
-def keep_within_bounds(boid, width=800, height=600, margin=20, turn_factor=1):
-    if boid.x < margin:
-        boid.dx += turn_factor
-    elif boid.x > width - margin:
-        boid.dx -= turn_factor
+def keep_within_bounds(
+    boid, width=800, height=600, margin_between_boids=20, turning_speed=1
+):
+    if boid.x < margin_between_boids:
+        boid.dx += turning_speed
+    elif boid.x > width - margin_between_boids:
+        boid.dx -= turning_speed
 
-    if boid.y < margin:
-        boid.dy += turn_factor
-    elif boid.y > height - margin:
-        boid.dy -= turn_factor
+    if boid.y < margin_between_boids:
+        boid.dy += turning_speed
+    elif boid.y > height - margin_between_boids:
+        boid.dy -= turning_speed
 
 
 def fly_towards_center(boids, boid, coherence=0.01, visual_range=100):
@@ -83,7 +84,7 @@ def match_velocity(boids, boid, matching_factor=0.05, visual_range=100):
 
 
 def limit_speed(boid, max_speed=10):
-    speed = np.sqrt(boid.dx ** 2 + boid.dy ** 2)
+    speed = np.sqrt(boid.dx**2 + boid.dy**2)
     if speed > max_speed:
         boid.dx = (boid.dx / speed) * max_speed
         boid.dy = (boid.dy / speed) * max_speed
@@ -94,48 +95,54 @@ def main():
     num_boids = 100
     visual_range = 75
     coherence = 0.01
-    
     max_speed = 5
-    turn_factor = 1
-    margin = 20
+    turning_speed = 1
+    margin_between_boids = 20
 
     width, height = 800, 600
 
-    # initialize pygame
     pygame.init()
-    
-    # # Define the dimensions of screen object
     screen = pygame.display.set_mode((width, height))
 
-    boids = [Boid(x=random.uniform(0, width),
-                y=random.uniform(0, height),
-                dx=random.uniform(-max_speed, max_speed),
-                dy=random.uniform(-max_speed, max_speed))
-            for _ in range(num_boids)]
+    boids = [
+        Boid(
+            x=random.uniform(0, width),
+            y=random.uniform(0, height),
+            dx=random.uniform(-max_speed, max_speed),
+            dy=random.uniform(-max_speed, max_speed),
+        )
+        for _ in range(num_boids)
+    ]
 
     gameOn = True
     while gameOn:
         screen.fill((255, 255, 255))  # Fill the screen with white background
 
         for event in pygame.event.get():
-            
             # Check for KEYDOWN event
             if event.type == KEYDOWN:
-                
                 # If the Backspace key has been pressed set
                 # running to false to exit the main loop
                 if event.key == K_BACKSPACE:
                     gameOn = False
-                    
+
             elif event.type == QUIT:
                 gameOn = False
-    
+
         for boid in boids:
-            fly_towards_center(boids, boid, visual_range=visual_range, coherence=coherence)
+            fly_towards_center(
+                boids, boid, visual_range=visual_range, coherence=coherence
+            )
             avoid_others(boids, boid)
             match_velocity(boids, boid, visual_range=visual_range)
             limit_speed(boid, max_speed=max_speed)
-            keep_within_bounds(boid, width=width, height= height, margin=margin, turn_factor = turn_factor)
+            keep_within_bounds(
+                boid,
+                width=width,
+                height=height,
+                margin_between_boids=margin_between_boids,
+                turning_speed=turning_speed,
+            )
             boid.update()
 
         for boid in boids:
@@ -143,5 +150,7 @@ def main():
 
         pygame.display.flip()
 
+
 import cProfile
-cProfile.run('main()')
+
+cProfile.run("main()")
