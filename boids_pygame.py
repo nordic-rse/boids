@@ -1,7 +1,7 @@
 import pygame
 from pygame.locals import *
 import random
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 import numpy as np
 
 
@@ -37,7 +37,7 @@ def keep_within_bounds(boid, width=800, height=600, margin=20, turn_factor=1):
         boid.dy -= turn_factor
 
 
-def fly_towards_center(boids, boid, cohesion=0.01, visual_range=100):
+def fly_towards_center(boids, boid, coherence=0.01, visual_range=100):
     centerX, centerY, num_neighbors = 0, 0, 0
 
     for other_boid in boids:
@@ -49,8 +49,8 @@ def fly_towards_center(boids, boid, cohesion=0.01, visual_range=100):
     if num_neighbors:
         centerX /= num_neighbors
         centerY /= num_neighbors
-        boid.dx += (centerX - boid.x) * cohesion
-        boid.dy += (centerY - boid.y) * cohesion
+        boid.dx += (centerX - boid.x) * coherence
+        boid.dy += (centerY - boid.y) * coherence
 
 
 def avoid_others(boids, boid, min_distance=20, avoid_factor=0.05):
@@ -93,6 +93,8 @@ def main():
     # Boid simulation parameters
     num_boids = 100
     visual_range = 75
+    coherence = 0.01
+    
     max_speed = 5
     turn_factor = 1
     margin = 20
@@ -129,11 +131,11 @@ def main():
                 gameOn = False
     
         for boid in boids:
-            fly_towards_center(boids, boid, visual_range=visual_range)
+            fly_towards_center(boids, boid, visual_range=visual_range, coherence=coherence)
             avoid_others(boids, boid)
             match_velocity(boids, boid, visual_range=visual_range)
             limit_speed(boid, max_speed=max_speed)
-            keep_within_bounds(boid, width=width, height= height, margin=margin, turn_factor=turn_factor)
+            keep_within_bounds(boid, width=width, height= height, margin=margin, turn_factor = turn_factor)
             boid.update()
 
         for boid in boids:
