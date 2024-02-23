@@ -5,16 +5,6 @@ from dataclasses import dataclass, field
 import numpy as np
 
 
-# Boid simulation parameters
-num_boids = 100
-visual_range = 75
-max_speed = 5
-turn_factor = 1
-margin = 20
-
-width, height = 800, 600
-
-
 @dataclass
 class Boid:
     x: float
@@ -35,7 +25,7 @@ def distance(boid1, boid2):
     return np.sqrt((boid1.x - boid2.x) ** 2 + (boid1.y - boid2.y) ** 2)
 
 
-def keep_within_bounds(boid):
+def keep_within_bounds(boid, width=800, height=600, margin=20, turn_factor=1):
     if boid.x < margin:
         boid.dx += turn_factor
     elif boid.x > width - margin:
@@ -47,7 +37,7 @@ def keep_within_bounds(boid):
         boid.dy -= turn_factor
 
 
-def fly_towards_center(boids, boid, cohesion=0.01):
+def fly_towards_center(boids, boid, cohesion=0.01, visual_range=100):
     centerX, centerY, num_neighbors = 0, 0, 0
 
     for other_boid in boids:
@@ -76,7 +66,7 @@ def avoid_others(boids, boid, min_distance=20, avoid_factor=0.05):
     boid.dy += move_y * avoid_factor
 
 
-def match_velocity(boids, boid, matching_factor=0.05):
+def match_velocity(boids, boid, matching_factor=0.05, visual_range=100):
     avg_dx, avg_dy, num_neighbors = 0, 0, 0
 
     for other_boid in boids:
@@ -92,22 +82,28 @@ def match_velocity(boids, boid, matching_factor=0.05):
         boid.dy += (avg_dy - boid.dy) * matching_factor
 
 
-def limit_speed(boid):
+def limit_speed(boid, max_speed=10):
     speed = np.sqrt(boid.dx ** 2 + boid.dy ** 2)
     if speed > max_speed:
         boid.dx = (boid.dx / speed) * max_speed
         boid.dy = (boid.dy / speed) * max_speed
 
 
-# initialize pygame
-pygame.init()
- 
-# # Define the dimensions of screen object
-screen = pygame.display.set_mode((width, height))
- 
- 
- 
 def main():
+    # Boid simulation parameters
+    num_boids = 100
+    visual_range = 75
+    max_speed = 5
+    turn_factor = 1
+    margin = 20
+
+    width, height = 800, 600
+
+    # initialize pygame
+    pygame.init()
+    
+    # # Define the dimensions of screen object
+    screen = pygame.display.set_mode((width, height))
 
     boids = [Boid(x=random.uniform(0, width),
                 y=random.uniform(0, height),
@@ -117,7 +113,6 @@ def main():
 
     gameOn = True
     while gameOn:
-    # for i in range(1):
         screen.fill((255, 255, 255))  # Fill the screen with white background
 
         for event in pygame.event.get():
@@ -134,11 +129,11 @@ def main():
                 gameOn = False
     
         for boid in boids:
-            fly_towards_center(boids, boid)
+            fly_towards_center(boids, boid, visual_range=visual_range)
             avoid_others(boids, boid)
-            match_velocity(boids, boid)
-            limit_speed(boid)
-            keep_within_bounds(boid)
+            match_velocity(boids, boid, visual_range=visual_range)
+            limit_speed(boid, max_speed=max_speed)
+            keep_within_bounds(boid, width=width, height= height, margin=margin, turn_factor=turn_factor)
             boid.update()
 
         for boid in boids:
