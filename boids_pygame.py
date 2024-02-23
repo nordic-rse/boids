@@ -1,16 +1,15 @@
 import pygame
 from pygame.locals import *
 import random
-from dataclasses import dataclass
 import numpy as np
 
 
-@dataclass
 class Boid:
-    x: float
-    y: float
-    dx: float
-    dy: float
+    def __init__(self, x, y, dx, dy):
+        self.x = x
+        self.y = y
+        self.dx = dx
+        self.dy = dy
 
     def update(self):
         self.x += self.dx
@@ -18,11 +17,6 @@ class Boid:
 
     def draw(self, screen):
         pygame.draw.circle(screen, (0, 0, 255), (int(self.x), int(self.y)), 2)
-
-
-def distance(boid1, boid2):
-    return np.sqrt((boid1.x - boid2.x) ** 2 + (boid1.y - boid2.y) ** 2)
-
 
 def keep_within_bounds(
     boid, width=800, height=600, margin_between_boids=20, turning_speed=1
@@ -36,6 +30,9 @@ def keep_within_bounds(
         boid.dy += turning_speed
     elif boid.y > height - margin_between_boids:
         boid.dy -= turning_speed
+
+def distance(boid1, boid2):
+    return np.sqrt((boid1.x - boid2.x) ** 2 + (boid1.y - boid2.y) ** 2)
 
 
 def fly_towards_center(boids, boid, coherence=0.01, visual_range=100):
