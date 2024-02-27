@@ -1,8 +1,8 @@
 import pygame
 from pygame.locals import *
 import random
-from boid import Boid
-from functions import (
+from .boid import Boid
+from .functions import (
     fly_towards_center,
     avoid_others,
     match_velocity,
@@ -71,6 +71,6 @@ def run_simulation(
         pygame.display.flip()
 
 
-import cProfile
+# import cProfile
 
-cProfile.run("run_simulation()")
+# cProfile.run("run_simulation()")
