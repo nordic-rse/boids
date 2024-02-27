@@ -9,6 +9,10 @@ readme = "README.md"
 license = {file = "LICENSE"}
 classifiers = ["License :: OSI Approved :: MIT License"]
 dynamic = ["version", "description"]
+dependencies = [
+    "pygame",
+    "numpy",
+]
 
 [project.urls]
 Home = "https://github.com/gregordecristoforo/boids"
