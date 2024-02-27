@@ -43,7 +43,7 @@ def run_simulation(
             if event.type == KEYDOWN:
                 # If the Backspace key has been pressed set
                 # running to false to exit the main loop
-                if event.key == K_BACKSPACE:
+                if event.key == K_BACKSPACE or event.key == pygame.K_ESCAPE:
                     gameOn = False
 
             elif event.type == QUIT:
@@ -69,8 +69,4 @@ def run_simulation(
             boid.draw(screen)
 
         pygame.display.flip()
-
-
-# import cProfile
-
-# cProfile.run("run_simulation()")
+    pygame.quit()
