@@ -11,17 +11,16 @@ from functions import (
 )
 
 
-def main():
-    # Boid simulation parameters
-    num_boids = 100
-    visual_range = 75
-    coherence = 0.01
-    max_speed = 5
-    turning_speed = 1
-    margin_between_boids = 20
-
-    width, height = 800, 600
-
+def run_simulation(
+    num_boids=100,
+    visual_range=75,
+    coherence=0.01,
+    max_speed=5,
+    turning_speed=1,
+    margin_between_boids=20,
+    width=800,
+    height=600,
+):
     pygame.init()
     screen = pygame.display.set_mode((width, height))
 
@@ -74,4 +73,4 @@ def main():
 
 import cProfile
 
-cProfile.run("main()")
+cProfile.run("run_simulation()")
