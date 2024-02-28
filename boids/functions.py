@@ -19,7 +19,7 @@ def distance(boid1, boid2):
     return np.sqrt((boid1.x - boid2.x) ** 2 + (boid1.y - boid2.y) ** 2)
 
 
-def fly_towards_center(boids, boid, coherence=0.01, visual_range=100):
+def fly_towards_center(boids, boid, cohesion=0.01, visual_range=100):
     centerX, centerY, num_neighbors = 0, 0, 0
 
     for other_boid in boids:
@@ -31,11 +31,11 @@ def fly_towards_center(boids, boid, coherence=0.01, visual_range=100):
     if num_neighbors:
         centerX /= num_neighbors
         centerY /= num_neighbors
-        boid.dx += (centerX - boid.x) * coherence
-        boid.dy += (centerY - boid.y) * coherence
+        boid.dx += (centerX - boid.x) * cohesion
+        boid.dy += (centerY - boid.y) * cohesion
 
 
-def avoid_others(boids, boid, min_distance=20, avoid_factor=0.05):
+def avoid_others(boids, boid, min_distance=20, separation=0.05):
     move_x, move_y = 0, 0
 
     for other_boid in boids:
@@ -44,11 +44,11 @@ def avoid_others(boids, boid, min_distance=20, avoid_factor=0.05):
                 move_x += boid.x - other_boid.x
                 move_y += boid.y - other_boid.y
 
-    boid.dx += move_x * avoid_factor
-    boid.dy += move_y * avoid_factor
+    boid.dx += move_x * separation
+    boid.dy += move_y * separation
 
 
-def match_velocity(boids, boid, matching_factor=0.05, visual_range=100):
+def match_velocity(boids, boid, alignment=0.05, visual_range=100):
     avg_dx, avg_dy, num_neighbors = 0, 0, 0
 
     for other_boid in boids:
@@ -60,8 +60,8 @@ def match_velocity(boids, boid, matching_factor=0.05, visual_range=100):
     if num_neighbors:
         avg_dx /= num_neighbors
         avg_dy /= num_neighbors
-        boid.dx += (avg_dx - boid.dx) * matching_factor
-        boid.dy += (avg_dy - boid.dy) * matching_factor
+        boid.dx += (avg_dx - boid.dx) * alignment
+        boid.dy += (avg_dy - boid.dy) * alignment
 
 
 def limit_speed(boid, max_speed=10):
