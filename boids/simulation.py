@@ -14,6 +14,9 @@ from .functions import (
 def run_simulation(
     num_boids=100,
     visual_range=75,
+    matching_factor=0.05,
+    min_distance=20,
+    avoid_factor=0.05,
     coherence=0.01,
     max_speed=5,
     turning_speed=1,
@@ -53,8 +56,8 @@ def run_simulation(
             fly_towards_center(
                 boids, boid, visual_range=visual_range, coherence=coherence
             )
-            avoid_others(boids, boid)
-            match_velocity(boids, boid, visual_range=visual_range)
+            avoid_others(boids, boid,min_distance=min_distance, avoid_factor=avoid_factor)
+            match_velocity(boids, boid,matching_factor=matching_factor, visual_range=visual_range)
             limit_speed(boid, max_speed=max_speed)
             keep_within_bounds(
                 boid,
