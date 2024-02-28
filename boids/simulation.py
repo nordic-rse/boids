@@ -56,8 +56,8 @@ def run_simulation(
             fly_towards_center(
                 boids, boid, visual_range=visual_range, cohesion=cohesion
             )
-            avoid_others(boids, boid,min_distance=min_distance, separation=separation)
-            match_velocity(boids, boid,alignment=alignment, visual_range=visual_range)
+            avoid_others(boids, boid, min_distance=min_distance, separation=separation)
+            match_velocity(boids, boid, alignment=alignment, visual_range=visual_range)
             limit_speed(boid, max_speed=max_speed)
             keep_within_bounds(
                 boid,
