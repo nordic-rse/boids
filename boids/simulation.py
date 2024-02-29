@@ -26,6 +26,7 @@ def run_simulation(
 ):
     pygame.init()
     screen = pygame.display.set_mode((width, height))
+    clock = pygame.time.Clock()
 
     boids = [
         Boid(
@@ -39,6 +40,8 @@ def run_simulation(
 
     gameOn = True
     while gameOn:
+        clock.tick(60)  # Set the FPS to 60
+
         screen.fill((255, 255, 255))  # Fill the screen with white background
 
         for event in pygame.event.get():
