@@ -4,6 +4,7 @@ build-backend = "flit_core.buildapi"
 
 [project]
 name = "boids"
+version = "0.1.1"
 authors = [{name = "Gregor Decristoforo", email = "gregor.decristoforo@gmail.com"}]
 readme = "README.md"
 license = {file = "LICENSE"}
