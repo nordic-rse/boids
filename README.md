@@ -31,3 +31,9 @@ You can overrite the default arguments as you wish (see the [`run_simulations()`
 ```Python
 boids.run_simulation(num_boids=50, alignment=0.03, separation=0.03, cohesion=0.02)
 ```
+
+## Reproducibility
+In order to guarantee that this project remains reproducible we include a `environment.yml` file specifying the exact version of all dependencies. Recreate a conda environment with these packages by:
+```sh
+conda env create -f environment.yml
+``` 
