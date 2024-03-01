@@ -2,13 +2,13 @@
 
 Example python package simulating boids: https://en.wikipedia.org/wiki/Boids
 <img src="https://github.com/gregordecristoforo/boids/blob/main/readme_assets/boids.gif" alt="Boids evolution" width="500" />
+This package serves as an example for researchers on how to turn their python code into a package.
 
 ## Installation
 The package is published to PyPI and can be installed with
 ```sh
 pip install boids
 ```
-!!! This doesn't work yet, the package is not on PypI yet !!!
 
 If you want the development version you must first clone the repo to your local machine,
 then install the project in development mode:

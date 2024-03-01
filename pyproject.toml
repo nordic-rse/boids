@@ -16,4 +16,4 @@ dependencies = [
 ]
 
 [project.urls]
-Home = "https://github.com/gregordecristoforo/boids"
+Home = "https://github.com/nordic-rse/boids"
