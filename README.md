@@ -2,4 +2,4 @@ Example python package simulating boids: https://en.wikipedia.org/wiki/Boids
 
 Still work in progress 
 
-[![Watch the video](readme_assets/video_thumbnail.png)](https://github.com/gregordecristoforo/boids/blob/main/readme_assets/boids.mp4)
+<img src="https://github.com/uit-cosmo/blobmodel/blob/main/readme_files/1d_blobs.gif" alt="Boids evolution" style="max-width: 40%;" />
