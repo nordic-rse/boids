@@ -1,5 +1,5 @@
 import pytest
-from .boid import Boid
+from boids import Boid
 from .functions import (
     fly_towards_center,
     avoid_others,
