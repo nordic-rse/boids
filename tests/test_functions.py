@@ -1,6 +1,6 @@
 import pytest
 from boids import Boid
-from .functions import (
+from boids.functions import (
     fly_towards_center,
     avoid_others,
     match_velocity,
