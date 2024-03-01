@@ -13,14 +13,14 @@ from .functions import (
 
 def run_simulation(
     num_boids=100,
-    visual_range=75,
     alignment=0.05,
-    min_distance=20,
     separation=0.05,
     cohesion=0.01,
     max_speed=5,
     turning_speed=1,
     margin_between_boids=20,
+    min_distance=20,
+    visual_range=75,
     width=800,
     height=600,
 ):
@@ -31,12 +31,8 @@ def run_simulation(
     ----------
     num_boids : int, optional
         The number of boids in the simulation, by default 100.
-    visual_range : float, optional
-        The distance within which a boid considers other boids, by default 75.
     alignment : float, optional
         The degree to which a boid tries to align its velocity with other boids, by default 0.05.
-    min_distance : float, optional
-        The minimum distance a boid tries to keep from other boids, by default 20.
     separation : float, optional
         The degree to which a boid tries to move away from other boids, by default 0.05.
     cohesion : float, optional
@@ -47,6 +43,10 @@ def run_simulation(
         The amount to adjust the boid's direction by, by default 1.
     margin_between_boids : float, optional
         The minimum distance the boid should keep from the edge of the bounds, by default 20.
+    min_distance : float, optional
+        The minimum distance a boid tries to keep from other boids, by default 20.
+    visual_range : float, optional
+        The distance within which a boid considers other boids, by default 75.
     width : int, optional
         The width of the simulation domain, by default 800.
     height : int, optional
