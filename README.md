@@ -1,8 +1,7 @@
 # boids
 
 Example python package simulating boids: https://en.wikipedia.org/wiki/Boids
-
-<img src="https://github.com/gregordecristoforo/boids/blob/main/readme_assets/boids.gif" alt="Boids evolution" style="max-width: 10%;" />
+<img src="https://github.com/gregordecristoforo/boids/blob/main/readme_assets/boids.gif" alt="Boids evolution" width="500" />
 
 ## Installation
 The package is published to PyPI and can be installed with
