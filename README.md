@@ -1,8 +1,9 @@
 # boids
 
-Example python package simulating boids: https://en.wikipedia.org/wiki/Boids
+Example python package simulating boids: https://en.wikipedia.org/wiki/Boids. This package serves as an example for researchers on how to turn their python code into a package.
+
 <img src="https://github.com/gregordecristoforo/boids/blob/main/readme_assets/boids.gif" alt="Boids evolution" width="500" />
-This package serves as an example for researchers on how to turn their python code into a package.
+
 
 ## Installation
 The package is published to PyPI and can be installed with
